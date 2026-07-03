@@ -136,8 +136,9 @@ public class PetGeneralListeners implements Listener {
     @EventHandler(priority=EventPriority.HIGHEST)
     public void onEntitySpawn(EntitySpawnEvent event) {
         if (event.isCancelled()) {
+            int i = 0;
             for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
-                if (element.getClassName().contains("cosmetics")) {
+                if (i++ >= 2 && element.getClassName().contains("cosmetics")) {
                     // This has something to do with cosmetics, must be us
                     event.setCancelled(false);
                 }
